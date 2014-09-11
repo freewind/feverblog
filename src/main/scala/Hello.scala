@@ -1,3 +1,7 @@
-object Hello extends App {
-	println("Hello world!")
+package io.github.freewind
+
+object Feverblog extends App {
+
+  println("Hello feverblog!")
+
 }
