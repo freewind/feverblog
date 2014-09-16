@@ -4,7 +4,7 @@
   name: feverblog
   class: io.github.freewind.Feverblog
 [scala]
-  version: 2.11.0
+  version: 2.10.2
 [repositories]
   local
   maven-central
