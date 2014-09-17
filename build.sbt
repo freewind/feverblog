@@ -6,6 +6,8 @@ organization := "io.github.freewind"
 
 scalaVersion := "2.10.2"
 
+sbtPlugin := true
+
 resolvers ++= Seq(
   "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
   "local_nexus" at "http://localhost:8888"
