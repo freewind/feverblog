@@ -15,7 +15,7 @@ object FeedPage {
   case class Data(siteConfig: SiteConfig, items: JList[FeedItem], lastBuildDate: String)
 
   def generate(rootCategory: RootCategory): String = {
-    val items = allPosts(rootCategory).sortWith(timeDesc).map(a =>
+    val items = allPostsWithoutDraft(rootCategory).sortWith(timeDesc).map(a =>
       FeedItem(a.title, a.link, a.dateAsPubDate, "Freewind", a.category.map(_.name).getOrElse("未分类"), a.contentAsHtml, a.id)
     )
     val template = new Template[Data]("feed")
@@ -42,7 +42,7 @@ object IndexPage {
 
   def generate(rootCategory: RootCategory): String = {
     case class Data(siteConfig: SiteConfig, categories: JList[Category], posts: JList[Post])
-    val posts = allPosts(rootCategory).sortWith(timeDesc)
+    val posts = allPostsWithoutDraft(rootCategory).sortWith(timeDesc)
     val categories = allFirstLevelCategories(rootCategory)
     val template = new Template[Data]("index")
     template.render(Data(siteConfig, categories, posts))

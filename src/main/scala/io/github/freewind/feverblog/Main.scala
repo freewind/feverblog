@@ -19,7 +19,7 @@ object GenerateSite {
     val indexPageContent = IndexPage.generate(rootCategory)
     FileUtils.writeStringToFile(new File(siteRoot, "index.html"), indexPageContent, "UTF-8")
 
-    allPosts(rootCategory).foreach { a =>
+    allPostsWithoutDraft(rootCategory).foreach { a =>
       val content = PostPage.generate(a)
       FileUtils.writeStringToFile(new File(siteRoot, s"posts/${a.alias}/index.html"), content, "UTF-8")
     }
