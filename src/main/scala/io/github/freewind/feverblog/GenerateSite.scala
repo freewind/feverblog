@@ -27,7 +27,7 @@ object GenerateSite {
     val feed = FeedPage.generate(rootCategory)
     FileUtils.writeStringToFile(new File(siteRoot, "feed.xml"), feed, "UTF-8")
 
-    FileUtils.copyDirectory(new File(AppConfig.baseDir, "assets"), siteRoot)
+    FileUtils.copyDirectory(new File(AppConfig.baseDir, "assets"), new File(siteRoot, "assets"))
 
     allFirstLevelCategories(rootCategory).foreach { category =>
       val content = CategoryPage.generate(category)
@@ -43,15 +43,3 @@ object Links {
     s"${siteConfig.baseUrl}/posts/${post.alias}"
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -54,7 +54,11 @@ object PostPage {
 
   def generate(post: Post): String = {
     case class Data(siteConfig: SiteConfig, post: Post)
-    val template = new Template[Data]("post")
+    val template = post.layout match {
+      case "post" => new Template[Data]("post")
+      case "slide" => new Template[Data]("slide")
+      case unknown => throw new RuntimeException(s"Unknown layout: $unknown")
+    }
     template.render(Data(siteConfig, post))
   }
 

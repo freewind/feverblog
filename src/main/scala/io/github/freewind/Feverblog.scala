@@ -8,12 +8,12 @@ final class FeverBlog extends xsbti.AppMain {
     AppConfig.baseDir = configuration.baseDirectory()
 
     val args = configuration.arguments().toList
-    args.headOption match {
-      case Some("new-post") => NewBlog()
-      case Some("generate") => GenerateSite()
-      case Some("publish") => println("### publish to github")
-      case Some(cmd) => println(s"### unknown command: $cmd")
-      case _ => println("Usage: fever new-post|generate|publish")
+    args match {
+      case Nil => println("Usage: fever new-post|generate|publish")
+      case "new" :: "post" :: _ => NewBlog()
+      case "generate" :: _ => GenerateSite()
+      case "publish" :: _ => println("### publish to github")
+      case cmds => println( s"""### unknown command: ${cmds.mkString(" ")}""")
     }
 
     new Exit(0)
