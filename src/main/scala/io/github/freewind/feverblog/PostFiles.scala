@@ -46,7 +46,7 @@ object PostFiles {
     val date = metaMap.get("date").map(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse).get
     val alias: String = metaMap.get("alias").get
     val tags = metaMap.get("tags").map(_.split("\\s+").toList).getOrElse(Nil)
-    val content = contentLines.mkString("\n")
+    val content = contentLines.tail.mkString("\n")
 
     new Post(id, title, content, alias, date, layout, tags, file)
   }
