@@ -542,7 +542,7 @@ function addPrettify() {
   var el = document.createElement('script');
   el.type = 'text/javascript';
   /* el.src = PERMANENT_URL_PREFIX + 'prettify.js'; */ /* ogom commented out */
-  el.src = 'js/prettify.js'; /* ogom added */
+  el.src = '/assets/slide/js/prettify.js'; /* ogom added */
   el.onload = function() {
     prettyPrint();
   }
@@ -564,7 +564,7 @@ function addGeneralStyle() {
   el.rel = 'stylesheet';
   el.type = 'text/css';
   /* el.href = PERMANENT_URL_PREFIX + 'styles.css'; */ /* ogom commented out */
-  el.href = 'css/styles.css'; /* ogom added */
+  el.href = '/assets/slide/css/styles.css'; /* ogom added */
   document.body.appendChild(el);
 
   var el = document.createElement('meta');
@@ -631,7 +631,7 @@ if (!window['_DEBUG'] && document.location.href.indexOf('?debug') !== -1) {
   window['_DEBUG'] = true;
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = '../slides.js';
+  script.src = '/assets/slide/slides.js';
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(script, s);
 

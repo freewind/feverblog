@@ -23,7 +23,7 @@ case class Post(id: String, title: String, content: String, alias: String, date:
 
   def link: String = Links.postLink(this)
 
-  def slideActions: JList[String] = content.split("\n-{3,}\n").toList.map(new Markdown4jProcessor().process).asJava
+  def slideSections: JList[String] = content.split("\n-{3,}\n").toList.map(new Markdown4jProcessor().process).asJava
 
 }
 
