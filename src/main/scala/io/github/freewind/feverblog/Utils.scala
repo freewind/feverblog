@@ -10,8 +10,8 @@ object Utils {
   }
 
   def allPosts(rootCategory: RootCategory): List[Post] = {
-    rootCategory.subCategories.foldLeft(rootCategory.articles) {
-      case (as, c) => as ::: articlesOfCategory(c)
+    rootCategory.subCategories.foldLeft(rootCategory.posts) {
+      case (as, c) => as ::: postsOfCategory(c)
     }.filterNot(_.alias == "???")
   }
 
@@ -23,9 +23,9 @@ object Utils {
     rootCategory.subCategories.sortWith((a, b) => a.order < b.order)
   }
 
-  def articlesOfCategory(category: Category): List[Post] = {
-    category.subCategories.foldLeft(category.articles) {
-      case (articles, sub) => articles ::: articlesOfCategory(sub)
+  def postsOfCategory(category: Category): List[Post] = {
+    category.subCategories.foldLeft(category.posts) {
+      case (posts, sub) => posts ::: postsOfCategory(sub)
     }
 
   }

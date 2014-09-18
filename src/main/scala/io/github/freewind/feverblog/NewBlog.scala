@@ -17,7 +17,7 @@ object NewBlog {
 
     val newPostId = GenerateNewPostId(allPosts(rootCategory))
 
-    val newPostName = s"$today-???.md"
+    val newPostName = s"$today-$newPostId-???.md"
 
     val template =
       s"""

@@ -28,12 +28,12 @@ object FeedPage {
 
 object CategoryPage {
 
-  case class Data(siteConfig: SiteConfig, category: Category, articles: JList[Post])
+  case class Data(siteConfig: SiteConfig, category: Category, posts: JList[Post])
 
   def generate(category: Category): String = {
     val template = new Template[Data]("category")
-    val articles = articlesOfCategory(category).sortWith(timeAsc)
-    template.render(Data(siteConfig, category, articles))
+    val posts = postsOfCategory(category).sortWith(timeAsc)
+    template.render(Data(siteConfig, category, posts))
   }
 }
 
@@ -41,11 +41,11 @@ object CategoryPage {
 object IndexPage {
 
   def generate(rootCategory: RootCategory): String = {
-    case class Data(siteConfig: SiteConfig, categories: JList[Category], articles: JList[Post])
-    val articles = allPosts(rootCategory).sortWith(timeDesc)
+    case class Data(siteConfig: SiteConfig, categories: JList[Category], posts: JList[Post])
+    val posts = allPosts(rootCategory).sortWith(timeDesc)
     val categories = allFirstLevelCategories(rootCategory)
     val template = new Template[Data]("index")
-    template.render(Data(siteConfig, categories, articles))
+    template.render(Data(siteConfig, categories, posts))
   }
 }
 
@@ -53,7 +53,7 @@ object IndexPage {
 object PostPage {
 
   def generate(post: Post): String = {
-    case class Data(siteConfig: SiteConfig, article: Post)
+    case class Data(siteConfig: SiteConfig, post: Post)
     val template = new Template[Data]("post")
     template.render(Data(siteConfig, post))
   }
