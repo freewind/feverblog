@@ -429,8 +429,8 @@ code {
 
 pre > code {
   background: rgb(240, 240, 240);
-  font-size: 150%;
-  line-height: 1.5;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 iframe {
