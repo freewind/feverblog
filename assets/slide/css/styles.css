@@ -427,6 +427,12 @@ code {
   color: black;
 }
 
+pre > code {
+  background: rgb(240, 240, 240);
+  font-size: 150%;
+  line-height: 1.5;
+}
+
 iframe {
   width: 100%;
 
