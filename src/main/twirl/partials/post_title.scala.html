@@ -1,0 +1,5 @@
+@(post: Post)
+<span>@post.title</span>&nbsp;
+<a href="@{post.link(includeDomain=false)}">
+@{post.link()}
+</a>

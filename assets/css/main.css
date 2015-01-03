@@ -8,6 +8,21 @@ body {
     padding: 0 20px;
 }
 
-.index_posts a {
-    text-decoration: none;
+a {
+    text-decoration: underline;
+    color: #21759b;
+}
+
+a:visited {
+    color: #9f9f9f;
+}
+
+.posts li {
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.category_title {
+    font-size: 40px;
+    line-height: 80px;
 }

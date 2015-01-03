@@ -21,9 +21,10 @@ object FeedPage {
 
 object CategoryPage {
 
-  def generate(category: Category): String = {
-    val posts = postsOfCategory(category).sortWith(timeAsc)
-    html.category.render(siteConfig, category, posts).toString()
+  def generate(currentCategory: Category, rootCategory: RootCategory): String = {
+    val posts = postsOfCategory(currentCategory).sortWith(timeAsc)
+    val bigCategories = allFirstLevelCategories(rootCategory)
+    html.category.render(siteConfig, currentCategory, posts, bigCategories).toString()
   }
 }
 
@@ -40,9 +41,11 @@ object IndexPage {
 
 object PostPage {
 
-  def generate(post: Post): String = {
+  def generate(post: Post, rootCategory: RootCategory): String = {
     post.layout match {
-      case "post" => html.post.render(siteConfig, post).toString()
+      case "post" =>
+        val bigCategories = allFirstLevelCategories(rootCategory)
+        html.post.render(siteConfig, post, bigCategories).toString()
       case "slide" => html.slide.render(siteConfig, post).toString()
       case unknown => throw new RuntimeException(s"Unknown layout: $unknown")
     }

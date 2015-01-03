@@ -1,0 +1,9 @@
+@(siteConfig: SiteConfig, categories: List[Category])
+<div>
+    <span>@siteConfig.title</span>
+    @for(category <- categories) {
+        <span><a href="/category/@{category.alias}">@category.name</a></span>
+    }
+    <span><a href="https://freewind.disqus.com/admin/moderate">[comments admin]</a></span>
+    <span><a href="/feed.xml">[feed]</a></span>
+</div>

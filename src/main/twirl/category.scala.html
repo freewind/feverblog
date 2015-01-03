@@ -1,4 +1,4 @@
-@(siteConfig:SiteConfig, category:Category, posts:List[Post])
+@(siteConfig:SiteConfig, category:Category, posts:List[Post], categories: List[Category])
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,27 +6,21 @@
     @partials.html.head(siteConfig)
 </head>
 <body>
-
+    @partials.html.banner(siteConfig, categories)
     @showCategory(category:Category) = {
-        <ul class="index_posts">
-            @category.name
+        <ol class="posts">
+            <div class="category_title">@category.name</div>
             @for(post <- category.posts) {
                 <li>
-                    <span>@post.title</span>&nbsp;
-                    <a href="@{post.link(includeDomain=false)}">
-                        @{post.link()}
-                    </a>
+                    @partials.html.post_title(post)
                 </li>
             }
-        </ul>
+        </ol>
         @for(sub <- category.subCategories) {
             @showCategory(sub)
         }
     }
 
-<div>
-    @category.name
-</div>
 <div>
     @showCategory(category)
 </div>

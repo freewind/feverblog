@@ -19,9 +19,9 @@ object GenerateSite {
     val indexPageContent = IndexPage.generate(rootCategory)
     FileUtils.writeStringToFile(new File(siteRoot, "index.html"), indexPageContent, "UTF-8")
 
-    allPostsWithoutDraft(rootCategory).foreach { a =>
-      val content = PostPage.generate(a)
-      val target = new File(siteRoot, s"${a.link(includeDomain = false)}/index.html")
+    allPostsWithoutDraft(rootCategory).foreach { post =>
+      val content = PostPage.generate(post, rootCategory)
+      val target = new File(siteRoot, s"${post.link(includeDomain = false)}/index.html")
       println(">>> " + target)
       FileUtils.writeStringToFile(target, content, "UTF-8")
     }
@@ -32,7 +32,7 @@ object GenerateSite {
     FileUtils.copyDirectory(new File(AppConfig.baseDir, "assets"), new File(siteRoot, "assets"))
 
     allFirstLevelCategories(rootCategory).foreach { category =>
-      val content = CategoryPage.generate(category)
+      val content = CategoryPage.generate(category, rootCategory)
       FileUtils.writeStringToFile(new File(siteRoot, s"category/${category.alias}/index.html"), content, "UTF-8")
     }
 

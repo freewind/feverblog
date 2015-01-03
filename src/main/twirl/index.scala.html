@@ -7,23 +7,12 @@
     @partials.html.head(siteConfig)
 </head>
 <body>
-
+    @partials.html.banner(siteConfig, categories)
 <div>
-    <span>@siteConfig.title</span>
-    @for(category <- categories) {
-        <span><a href="/category/@{category.alias}">@category.name</a></span>
-    }
-    <span><a href="https://freewind.disqus.com/admin/moderate">[comments admin]</a></span>
-    <span><a href="/feed.xml">[feed]</a></span>
-</div>
-<div>
-    <ul class="index_posts">
+    <ul class="posts">
         @for(post <- posts) {
             <li>
-                <span>@post.title</span>&nbsp;
-                <a href="@{post.link(includeDomain=false)}">
-                    @{post.link()}
-                </a>
+                @partials.html.post_title(post)
             </li>
         }
     </ul>

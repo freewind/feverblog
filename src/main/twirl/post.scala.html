@@ -1,4 +1,4 @@
-@(siteConfig:SiteConfig, post: Post)
+@(siteConfig:SiteConfig, post: Post, categories: List[Category])
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +6,7 @@
     @partials.html.head(siteConfig)
 </head>
 <body>
+    @partials.html.banner(siteConfig, categories)
 
 <h1>
     (@post.dateOnly) @post.title
