@@ -7,20 +7,28 @@
 </head>
 <body>
 
+    @showCategory(category:Category) = {
+        <ul class="index_posts">
+            @category.name
+            @for(post <- category.posts) {
+                <li>
+                    <span>@post.title</span>&nbsp;
+                    <a href="@{post.link(includeDomain=false)}">
+                        @{post.link()}
+                    </a>
+                </li>
+            }
+        </ul>
+        @for(sub <- category.subCategories) {
+            @showCategory(sub)
+        }
+    }
+
 <div>
     @category.name
 </div>
 <div>
-    <ul class="index_posts">
-        @for(post <- posts) {
-            <li>
-                <span>@post.title</span>&nbsp;
-                <a href="@{post.link(includeDomain=false)}">
-                    @{post.link()}
-                </a>
-            </li>
-        }
-    </ul>
+    @showCategory(category)
 </div>
 </body>
     @partials.html.google_analytics(siteConfig)

@@ -12,7 +12,7 @@ object FeedPage {
     val items = allPostsWithoutDraft(rootCategory).sortWith(timeDesc).map(p =>
       FeedItem(p.title, p.link(), p.dateAsPubDate, "Freewind", p.category.map(_.name).getOrElse("未分类"), p.contentAsHtml, p.id)
     )
-    html.feed.render(siteConfig, items, lastBuildDate).toString()
+    xml.feed.render(siteConfig, items, lastBuildDate).toString().trim
   }
 
   def lastBuildDate = formatAsRssDate(new Date)
