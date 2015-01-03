@@ -1,6 +1,6 @@
 package io.github.freewind.feverblog
 
-import java.util.{Date, List => JList}
+import java.util.Date
 
 import io.github.freewind.feverblog.Utils._
 
@@ -8,11 +8,9 @@ object FeedPage {
 
   case class FeedItem(title: String, link: String, pubDate: String, creator: String, category: String, content: String, guid: String)
 
-  case class Data(siteConfig: SiteConfig, items: JList[FeedItem], lastBuildDate: String)
-
   def generate(rootCategory: RootCategory): String = {
-    val items = allPostsWithoutDraft(rootCategory).sortWith(timeDesc).map(a =>
-      FeedItem(a.title, a.link(), a.dateAsPubDate, "Freewind", a.category.map(_.name).getOrElse("未分类"), a.contentAsHtml, a.id)
+    val items = allPostsWithoutDraft(rootCategory).sortWith(timeDesc).map(p =>
+      FeedItem(p.title, p.link(), p.dateAsPubDate, "Freewind", p.category.map(_.name).getOrElse("未分类"), p.contentAsHtml, p.id)
     )
     html.feed.render(siteConfig, items, lastBuildDate).toString()
   }
@@ -22,8 +20,6 @@ object FeedPage {
 
 
 object CategoryPage {
-
-  case class Data(siteConfig: SiteConfig, category: Category, posts: JList[Post])
 
   def generate(category: Category): String = {
     val posts = postsOfCategory(category).sortWith(timeAsc)
@@ -35,7 +31,6 @@ object CategoryPage {
 object IndexPage {
 
   def generate(rootCategory: RootCategory): String = {
-    case class Data(siteConfig: SiteConfig, categories: JList[Category], posts: JList[Post])
     val posts = allPostsWithoutDraft(rootCategory).sortWith(timeDesc)
     val categories = allFirstLevelCategories(rootCategory)
     html.index.render(siteConfig, categories, posts).toString()
