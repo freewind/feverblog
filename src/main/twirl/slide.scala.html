@@ -1,8 +1,10 @@
+@(siteConfig:SiteConfig, post: Post)
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{post.title}}</title>
-    {{>partials/head}}
+    <title>@post.title</title>
+    @partials.html.head(siteConfig)
 
     <script src='/assets/slide/js/slides.js'></script>
     <script src='/assets/slide/js/slide-resize.js'></script>
@@ -19,13 +21,14 @@
 
     <!-- <article class='biglogo'></article> -->
 
-    {{#post.slideSections}}
+    @for(section <- post.slideSections) {
         <article>
-            <p>{{{.}}}</p>
+            <p>@Html(section)</p>
         </article>
-    {{/post.slideSections}}
+    }
 
 </section>
 
 </body>
+    @partials.html.google_analytics(siteConfig)
 </html>

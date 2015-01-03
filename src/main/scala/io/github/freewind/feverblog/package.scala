@@ -6,8 +6,8 @@ package object feverblog {
 
   def postRoot = new File(s"${AppConfig.baseDir.getAbsolutePath}/_posts")
 
-  def siteRoot = new File("/Users/freewind/workspace/freewind.github.io")
+  def siteRoot = new File("/Users/twer/workspace/freewind.github.io")
 
-  def siteConfig = new SiteConfig("Freewind @ Thoughtworks", "http://freewind.github.io", "UA-54316895-1")
+  def siteConfig = new SiteConfig("Freewind @ Thoughtworks", "http://freewind.in", "UA-54316895-1")
 
 }

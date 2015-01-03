@@ -20,8 +20,6 @@ libraryDependencies ++= Seq(
   "commons-io" % "commons-io" % "2.4",
   "com.typesafe.play" %% "twirl-api" % "1.0.4",
   "org.commonjava.googlecode.markdown4j" % "markdown4j" % "2.2-cj-1.0",
-  "com.github.spullara.mustache.java" % "compiler" % "0.8.16",
-  "org.jsoup" % "jsoup" % "1.7.3",
   "org.specs2" %% "specs2" % "2.4" % "test"
 )
 

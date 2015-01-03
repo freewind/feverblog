@@ -21,7 +21,7 @@ case class Post(id: String, title: String, content: String, alias: String, date:
 
   def dateOnly: String = new SimpleDateFormat("yyyy-MM-dd").format(date)
 
-  def link: String = Links.postLink(this)
+  def link(includeDomain: Boolean = true): String = Links.postLink(this, includeDomain)
 
   def slideSections: JList[String] = content.split("\n-{3,}\n").toList.map(new Markdown4jProcessor().process).asJava
 

@@ -1,0 +1,26 @@
+@(siteConfig:SiteConfig, post: Post)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@post.title</title>
+    @partials.html.head(siteConfig)
+</head>
+<body>
+
+<h1>
+    (@post.dateOnly) @post.title
+</h1>
+
+    @partials.html.ad()
+
+<hr/>
+
+<div>
+    @Html(post.contentAsHtml)
+</div>
+
+    @partials.html.disqus(post)
+
+</body>
+    @partials.html.google_analytics(siteConfig)
+</html>

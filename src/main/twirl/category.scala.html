@@ -1,0 +1,27 @@
+@(siteConfig:SiteConfig, category:Category, posts:List[Post])
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@siteConfig.title</title>
+    @partials.html.head(siteConfig)
+</head>
+<body>
+
+<div>
+    @category.name
+</div>
+<div>
+    <ul class="index_posts">
+        @for(post <- posts) {
+            <li>
+                <span>@post.title</span>&nbsp;
+                <a href="@{post.link(includeDomain=false)}">
+                    @{post.link()}
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+</body>
+    @partials.html.google_analytics(siteConfig)
+</html>

@@ -21,7 +21,9 @@ object GenerateSite {
 
     allPostsWithoutDraft(rootCategory).foreach { a =>
       val content = PostPage.generate(a)
-      FileUtils.writeStringToFile(new File(siteRoot, s"posts/${a.alias}/index.html"), content, "UTF-8")
+      val target = new File(siteRoot, s"${a.link(includeDomain = false)}/index.html")
+      println(">>> " + target)
+      FileUtils.writeStringToFile(target, content, "UTF-8")
     }
 
     val feed = FeedPage.generate(rootCategory)
@@ -39,7 +41,7 @@ object GenerateSite {
 }
 
 object Links {
-  def postLink(post: Post) = {
-    s"${siteConfig.baseUrl}/posts/${post.alias}"
+  def postLink(post: Post, includeDomain: Boolean) = {
+    s"${if (includeDomain) siteConfig.baseUrl else ""}/posts/${post.id}-${post.alias}"
   }
 }
