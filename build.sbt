@@ -28,3 +28,17 @@ lazy val root = (project in file(".")).enablePlugins(SbtTwirl)
 TwirlKeys.templateImports += "io.github.freewind.feverblog._"
 
 mainClass in run := Some("io.github.freewind.Feverblog")
+
+lazy val install = taskKey[Unit]("Install this tool as 'fever' to your ~/bin")
+
+install <<= assembly map { (file: File) =>
+  val bin = new File(Path.userHome.absolutePath, "bin")
+  val jar = new File(bin, "fever-blog.jar")
+  val shell = new File(bin, "fever")
+  IO.createDirectory(bin)
+  IO.copyFile(file, jar)
+  println("copied to " + jar)
+  IO.write(shell, s"java -jar $jar $$(pwd) $$@")
+  s"chmod +x $shell".!
+  println("created executable file: " + shell)
+}

@@ -1,24 +1,22 @@
 package io.github.freewind
 
-import io.github.freewind.feverblog.{GenerateSite, NewBlog, AppConfig}
+import java.io.File
 
-final class FeverBlog extends xsbti.AppMain {
+import io.github.freewind.feverblog.{AppConfig, GenerateSite, NewBlog}
 
-  def run(configuration: xsbti.AppConfiguration): Exit = {
-    AppConfig.baseDir = configuration.baseDirectory()
+object FeverBlog {
 
-    val args = configuration.arguments().toList
-    args match {
-      case Nil => println("Usage: fever new-post|generate|publish")
-      case "new" :: "post" :: _ => NewBlog()
-      case "generate" :: _ => GenerateSite()
-      case "publish" :: _ => println("### publish to github")
-      case cmds => println( s"""### unknown command: ${cmds.mkString(" ")}""")
+  def main(args: Array[String]): Unit = {
+    args.toList match {
+      case Nil | _ :: Nil => println("Usage: fever new-post|generate")
+      case baseDir :: real =>
+        AppConfig.baseDir = new File(baseDir)
+        real match {
+          case "new" :: "post" :: Nil => NewBlog()
+          case "generate" :: Nil => GenerateSite()
+          case cmds => println( s"""unknown command: ${cmds.mkString(" ")}""")
+        }
     }
-
-    new Exit(0)
   }
-
 }
 
-class Exit(val code: Int) extends xsbti.Exit
