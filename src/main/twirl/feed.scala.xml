@@ -26,8 +26,9 @@
                 <dc:creator><![CDATA[@item.creator]]></dc:creator>
                 <category><![CDATA[@item.category]]></category>
                 <guid isPermaLink="false">@item.guid</guid>
-                <description><![CDATA[@Html(item.content)]]></description>
+                <description><![CDATA[@Xml(item.content)]]></description>
             </item>
         }
     </channel>
 </rss>
+
