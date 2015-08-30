@@ -21,7 +21,7 @@ object GenerateSite {
 
     allPostsWithoutDraft(rootCategory).foreach { post =>
       val content = PostPage.generate(post, rootCategory)
-      val target = new File(siteRoot, s"${post.link(includeDomain = false)}/index.html")
+      val target = new File(siteRoot, s"${post.link(includeDomain = false)}index.html")
       println(">>> " + target)
       FileUtils.writeStringToFile(target, content, "UTF-8")
     }
@@ -42,6 +42,6 @@ object GenerateSite {
 
 object Links {
   def postLink(post: Post, includeDomain: Boolean) = {
-    s"${if (includeDomain) siteConfig.baseUrl else ""}/posts/${post.id}-${post.alias}"
+    s"${if (includeDomain) siteConfig.baseUrl else ""}/posts/${post.id}-${post.alias}/"
   }
 }
